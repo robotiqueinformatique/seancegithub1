@@ -70,19 +70,14 @@ public class Robot extends IterativeRobot {
      * This function is called periodically during autonomous
      */
     public void autonomousPeriodic() {
-    	/*if(autoLoopCounter < 100) //Check if we've completed 100 loops (approximately 2 seconds)
+    	if(autoLoopCounter < 100) //Check if we've completed 100 loops (approximately 2 seconds)
 		{
 			myRobot.drive(-0.5, 0.0); 	// drive forwards half speed
 			autoLoopCounter++;
 			} else {
 			myRobot.drive(0.0, 0.0); 	// stop robot
-		}*/
-    	if (limitSwitch3.get() == true){
-    		armMotorController.set(-0.5);
-    }
-    	else {
-    		armMotorController.set(0); 
-    	}
+		}
+ 
     }
     
     /**
