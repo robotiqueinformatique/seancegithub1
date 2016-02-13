@@ -21,21 +21,20 @@ public class Robot extends IterativeRobot {
 	Joystick stick;
 	int autoLoopCounter;
 	SpeedController armMotorController;
-	SpeedController MotorLateral1;
-	SpeedController MotorLateral2;
+	SpeedController motorLateral1;
+	SpeedController motorLateral2;
 	DigitalInput limitSwitch3, limitSwitch4, limitSwitch5, limitSwitchHaut, limitSwitchBas;	
 	
 	
-	final double SPEED_ARMCONTROLLER = 0.7;
-	final double SPEED_LATERALMOTOR  = 0.5;
-	final double UP_ARMCONTROLLER    = -1.0;
-	final double DOWN_ARMCONTROLLER  = 1.0;
+	final static double SPEED_ARMCONTROLLER = 0.7;
+	final static double SPEED_LATERALMOTOR  = 0.5;
+	final static double UP_ARMCONTROLLER    = -1.0;
+	final static double DOWN_ARMCONTROLLER  = 1.0;
 	
-	final boolean PASACTIVE_LSWITCHT = true;
-	final boolean ACTIVE_LSWITCH     = false;
-	final boolean PRESSED_BUTTON = true;
-	final boolean UNPRESSED_BUTTON = false;
-	
+	final static boolean PASACTIVE_LSWITCH = true;
+	final static boolean ACTIVE_LSWITCH     = false;
+	final static boolean PRESSED_BUTTON = true;
+	final static boolean UNPRESSED_BUTTON = false;
 	
 	
     /**
@@ -46,8 +45,8 @@ public class Robot extends IterativeRobot {
     	myRobot = new RobotDrive(2,3,5,6);
     	stick = new Joystick(0);
     	armMotorController = new Talon(4);
-    	MotorLateral1 = new Talon(0);
-    	MotorLateral2 = new Talon (1);
+    	motorLateral1 = new Talon(0);
+    	motorLateral2 = new Talon (1);
     	limitSwitch3 = new DigitalInput(3);
     	limitSwitchHaut = new DigitalInput (1);
     	limitSwitchBas = new DigitalInput (7);
@@ -95,11 +94,11 @@ public class Robot extends IterativeRobot {
         SmartDashboard.putBoolean("limitSwitch3", limitSwitch3.get());
         SmartDashboard.putBoolean("limitSwitchBas", limitSwitchBas.get());
         
-        if (stick.getRawButton(3) ==  PRESSED_BUTTON && stick.getRawButton(10) == PRESSED_BUTTON && (limitSwitch3.get() == PASACTIVE_LSWITCHT) && (limitSwitchHaut.get() == PASACTIVE_LSWITCHT)) {
+        if (stick.getRawButton(3) ==  PRESSED_BUTTON && stick.getRawButton(10) == PRESSED_BUTTON && (limitSwitch3.get() == PASACTIVE_LSWITCH) && (limitSwitchHaut.get() == PASACTIVE_LSWITCH)) {
         	
 			armMotorController.set(UP_ARMCONTROLLER*SPEED_ARMCONTROLLER); //monter
         }
-        else if ((stick.getRawButton(4) == PRESSED_BUTTON || stick.getRawButton(9) == PRESSED_BUTTON) && (limitSwitchBas.get() == PASACTIVE_LSWITCHT)) {
+        else if ((stick.getRawButton(4) == PRESSED_BUTTON || stick.getRawButton(9) == PRESSED_BUTTON) && (limitSwitchBas.get() == PASACTIVE_LSWITCH)) {
 			armMotorController.set(DOWN_ARMCONTROLLER*SPEED_ARMCONTROLLER); //descendre
 		}
         else {
@@ -108,16 +107,16 @@ public class Robot extends IterativeRobot {
         
         
         if (stick.getRawButton(5) == true) {
-        	MotorLateral1.set(SPEED_LATERALMOTOR);
-        	MotorLateral2.set(SPEED_LATERALMOTOR);
+        	motorLateral1.set(SPEED_LATERALMOTOR);
+        	motorLateral2.set(SPEED_LATERALMOTOR);
         }
         else if (stick.getRawButton(6) == true) {
-        	MotorLateral1.set(-1*SPEED_LATERALMOTOR);
-        	MotorLateral2.set(-1*SPEED_LATERALMOTOR);
+        	motorLateral1.set(-1*SPEED_LATERALMOTOR);
+        	motorLateral2.set(-1*SPEED_LATERALMOTOR);
         }
         else{
-        	MotorLateral1.set(0);
-        	MotorLateral2.set(0);           
+        	motorLateral1.set(0);
+        	motorLateral2.set(0);           
         }
     }
     
